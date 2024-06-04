@@ -4,11 +4,15 @@ import { joinClasses } from '../utils/style-utils';
 
 type YearlyToggleProps = {
   isYearlyPeriodicity: boolean;
+  currency: string;
+  changeCurrency: (...args: any) => void;
   toggleYearlyPeriodicity: (...args: any) => void;
 };
 const YearlyToggle: FunctionComponent<YearlyToggleProps> = ({
   isYearlyPeriodicity,
   toggleYearlyPeriodicity,
+  currency,
+  changeCurrency,
 }) => {
   return (
     <div className={styles.container}>
@@ -29,7 +33,12 @@ const YearlyToggle: FunctionComponent<YearlyToggleProps> = ({
             : styles.thumb
         }
       ></div>
-      <select id='currency-selector' className={styles.select}>
+      <select
+        value={currency}
+        onChange={(e) => changeCurrency(e.target.value)}
+        id='currency-selector'
+        className={styles.select}
+      >
         <option value='USD'>$ USD</option>
         <option value='GBP'>£ GBP</option>
         <option value='CAD'>$ CAD</option>

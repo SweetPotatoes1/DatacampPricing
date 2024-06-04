@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import styles from '../css/price-option.module.css';
 import { joinClasses } from '../utils/style-utils';
+import { currencyToSymbol } from '../const/CurrencyConst';
 
 type PricingOptionProps = {
   title: string;
@@ -10,6 +11,7 @@ type PricingOptionProps = {
   linkAtTheBottom?: string;
   includesPreviousOptionText?: string;
   priceInUSD: number;
+  currency: string;
   buttonText: string;
   featureList: string[];
 };
@@ -20,11 +22,14 @@ const PriceOption: FunctionComponent<PricingOptionProps> = ({
   isBestValue,
   isHighlighted,
   priceInUSD,
+  currency,
   linkAtTheBottom,
   includesPreviousOptionText,
   buttonText,
   featureList,
 }) => {
+  const currencySymbol = currencyToSymbol[`${currency}`];
+
   let recurranceTextTop = '';
   let recurranceTextBottom = '';
 
@@ -43,7 +48,13 @@ const PriceOption: FunctionComponent<PricingOptionProps> = ({
   if (priceInUSD < 0) priceToBeDisplayed = 'Contact sales for pricing';
 
   return (
-    <article className={joinClasses(styles.priceOption, styles[`${title}`])}>
+    <article
+      className={joinClasses(
+        styles.priceOption,
+        styles[`${title}`],
+        styles[`${currency}`]
+      )}
+    >
       {isHighlighted && (
         <strong className={styles.mostPopular}> MOST POPULAR </strong>
       )}
@@ -54,19 +65,41 @@ const PriceOption: FunctionComponent<PricingOptionProps> = ({
         </h2>
         <strong className={styles.subtitle}>{subTitle}</strong>
       </div>
-      <div className={joinClasses(styles.price, styles[`${title}`])}>
+      <div
+        className={joinClasses(
+          styles.price,
+          styles[`${title}`],
+          styles[currency]
+        )}
+      >
         <strong className={joinClasses(styles.priceText, styles[`${title}`])}>
-          {` ${priceToBeDisplayed}`}
+          {`${priceInUSD > 0 ? currencySymbol : ''}${priceToBeDisplayed}`}
         </strong>
         {(title === 'premium' || title === 'teams') && (
           <div
-            className={joinClasses(styles.priceRecurrence, styles[`${title}`])}
+            className={joinClasses(
+              styles.priceRecurrence,
+              styles[`${title}`],
+              styles[`${currency}`]
+            )}
           >
             <div>
-              <span className={styles.recurrenceText}>{recurranceTextTop}</span>
+              <span
+                className={joinClasses(
+                  styles.recurrenceText,
+                  styles[`${currency}`]
+                )}
+              >
+                {recurranceTextTop}
+              </span>
             </div>
             <div>
-              <span className={styles.recurrenceText}>
+              <span
+                className={joinClasses(
+                  styles.recurrenceText,
+                  styles[`${currency}`]
+                )}
+              >
                 {recurranceTextBottom}
               </span>
             </div>
