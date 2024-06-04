@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import styles from './css/price-option.module.css';
-import { joinClasses } from './utils/style-utils';
+import styles from '../css/price-option.module.css';
+import { joinClasses } from '../utils/style-utils';
 
 type PricingOptionProps = {
   title: string;

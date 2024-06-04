@@ -1,13 +1,14 @@
+'use client';
 import React, { FunctionComponent } from 'react';
-import styles from './css/price-option-list.module.css';
-import { joinClasses } from './utils/style-utils';
+import styles from '../css/price-option-list.module.css';
+import { joinClasses } from '../utils/style-utils';
 import PriceOption from './PriceOption';
 import {
   BasicPlanOptions,
   PremiumPlanOption,
   TeamPlanOption,
   EnterprisePlanOption,
-} from './const/PlanOptions';
+} from '../const/PlanOptions';
 
 const PriceOptionList: FunctionComponent = () => {
   return (
