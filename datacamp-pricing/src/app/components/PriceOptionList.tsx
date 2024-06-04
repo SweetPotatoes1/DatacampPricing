@@ -1,5 +1,5 @@
 'use client';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import styles from '../css/price-option-list.module.css';
 import { joinClasses } from '../utils/style-utils';
 import PriceOption from './PriceOption';
@@ -9,6 +9,7 @@ import {
   TeamPlanOption,
   EnterprisePlanOption,
 } from '../const/PlanOptions';
+import { API_REQUEST_URL } from '../const/ApiCredentials';
 
 type PriceOptionListProps = {
   isYearlyPeriodicity: boolean;
@@ -18,13 +19,26 @@ const PriceOptionList: FunctionComponent<PriceOptionListProps> = ({
   isYearlyPeriodicity,
   currency,
 }) => {
+  let data: any;
+  const [exchangeRates, setExchangeRates] = useState({} as any);
+  const fetchExchangeRates = async () => {
+    await fetch(API_REQUEST_URL)
+      .then((response) => response.json())
+      .then((data) => setExchangeRates(data.data));
+  };
+  useEffect(() => {
+    fetchExchangeRates();
+  }, []);
+  const exchangeMultiplier =
+    currency !== 'USD' && exchangeRates ? exchangeRates[`${currency}`] : 1;
   const yearlyMultiplier = isYearlyPeriodicity ? 1 : 3;
+
   return (
     <div className={styles.priceOptionList}>
       <PriceOption
         title={'basic'}
         subTitle={'Limited Access'}
-        priceInUSD={0 * yearlyMultiplier}
+        priceInUSD={0}
         currency={currency}
         isYearlyPeriodicity={isYearlyPeriodicity}
         buttonText='Get Started'
@@ -33,7 +47,7 @@ const PriceOptionList: FunctionComponent<PriceOptionListProps> = ({
       <PriceOption
         title={'premium'}
         subTitle={'For Individuals'}
-        priceInUSD={25 * yearlyMultiplier}
+        priceInUSD={Math.round(25 * yearlyMultiplier * exchangeMultiplier)}
         currency={currency}
         isYearlyPeriodicity={isYearlyPeriodicity}
         buttonText='Subscribe now'
@@ -44,7 +58,7 @@ const PriceOptionList: FunctionComponent<PriceOptionListProps> = ({
       <PriceOption
         title={'teams'}
         subTitle={'For teams of 2 and up'}
-        priceInUSD={25 * yearlyMultiplier}
+        priceInUSD={Math.round(25 * yearlyMultiplier * exchangeMultiplier)}
         currency={currency}
         isYearlyPeriodicity={isYearlyPeriodicity}
         buttonText='Set Up a Team'
@@ -55,7 +69,7 @@ const PriceOptionList: FunctionComponent<PriceOptionListProps> = ({
       <PriceOption
         title={'enterprise'}
         subTitle={'Bespoke Solutions'}
-        priceInUSD={-1 * yearlyMultiplier}
+        priceInUSD={-1}
         currency={currency}
         isYearlyPeriodicity={isYearlyPeriodicity}
         buttonText='Request a Demo'
