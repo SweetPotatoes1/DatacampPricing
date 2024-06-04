@@ -9,7 +9,7 @@ type PricingOptionProps = {
   isBestValue?: boolean;
   linkAtTheBottom?: string;
   includesPreviousOptionText?: string;
-  priceInUSD: number | string;
+  priceInUSD: number;
   buttonText: string;
   featureList: string[];
 };
@@ -38,6 +38,10 @@ const PriceOption: FunctionComponent<PricingOptionProps> = ({
     recurranceTextBottom = 'billed annually';
   }
 
+  let priceToBeDisplayed: string | number = priceInUSD;
+  if (priceInUSD === 0) priceToBeDisplayed = 'Free';
+  if (priceInUSD < 0) priceToBeDisplayed = 'Contact sales for pricing';
+
   return (
     <article className={joinClasses(styles.priceOption, styles[`${title}`])}>
       {isHighlighted && (
@@ -52,7 +56,7 @@ const PriceOption: FunctionComponent<PricingOptionProps> = ({
       </div>
       <div className={joinClasses(styles.price, styles[`${title}`])}>
         <strong className={joinClasses(styles.priceText, styles[`${title}`])}>
-          {` ${priceInUSD}`}
+          {` ${priceToBeDisplayed}`}
         </strong>
         {(title === 'premium' || title === 'teams') && (
           <div

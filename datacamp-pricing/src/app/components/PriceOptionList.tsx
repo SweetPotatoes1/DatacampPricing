@@ -10,20 +10,26 @@ import {
   EnterprisePlanOption,
 } from '../const/PlanOptions';
 
-const PriceOptionList: FunctionComponent = () => {
+type PriceOptionListProps = {
+  isYearlyPeriodicity: boolean;
+};
+const PriceOptionList: FunctionComponent<PriceOptionListProps> = ({
+  isYearlyPeriodicity,
+}) => {
+  const yearlyMultiplier = isYearlyPeriodicity ? 1 : 3;
   return (
     <div className={styles.priceOptionList}>
       <PriceOption
         title={'basic'}
         subTitle={'Limited Access'}
-        priceInUSD={'Free'}
+        priceInUSD={0 * yearlyMultiplier}
         buttonText='Get Started'
         featureList={BasicPlanOptions}
       />
       <PriceOption
         title={'premium'}
         subTitle={'For Individuals'}
-        priceInUSD={'$25'}
+        priceInUSD={25 * yearlyMultiplier}
         buttonText='Subscribe now'
         isHighlighted
         isBestValue
@@ -32,7 +38,7 @@ const PriceOptionList: FunctionComponent = () => {
       <PriceOption
         title={'teams'}
         subTitle={'For teams of 2 and up'}
-        priceInUSD={'$25'}
+        priceInUSD={25 * yearlyMultiplier}
         buttonText='Set Up a Team'
         isBestValue
         includesPreviousOptionText='Everything in Premium plus:'
@@ -41,7 +47,7 @@ const PriceOptionList: FunctionComponent = () => {
       <PriceOption
         title={'enterprise'}
         subTitle={'Bespoke Solutions'}
-        priceInUSD={'Contact sales for pricing'}
+        priceInUSD={-1 * yearlyMultiplier}
         buttonText='Request a Demo'
         includesPreviousOptionText='Everything in Teams plus:'
         featureList={EnterprisePlanOption}

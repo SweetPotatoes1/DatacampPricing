@@ -18,7 +18,7 @@ export default function Home() {
             isYearlyPeriodicity={isYearlyPeriodicity}
             toggleYearlyPeriodicity={toggleYearlyPeriodicity}
           ></YearlyToggle>
-          <PriceOptionList />
+          <PriceOptionList isYearlyPeriodicity={isYearlyPeriodicity} />
         </div>
       </main>
     </body>
