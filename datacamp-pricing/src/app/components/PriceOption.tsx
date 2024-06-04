@@ -12,6 +12,7 @@ type PricingOptionProps = {
   includesPreviousOptionText?: string;
   priceInUSD: number;
   currency: string;
+  isYearlyPeriodicity: boolean;
   buttonText: string;
   featureList: string[];
 };
@@ -23,6 +24,7 @@ const PriceOption: FunctionComponent<PricingOptionProps> = ({
   isHighlighted,
   priceInUSD,
   currency,
+  isYearlyPeriodicity,
   linkAtTheBottom,
   includesPreviousOptionText,
   buttonText,
@@ -34,13 +36,22 @@ const PriceOption: FunctionComponent<PricingOptionProps> = ({
   let recurranceTextBottom = '';
 
   if (title === 'premium') {
-    recurranceTextTop = '/month';
-    recurranceTextBottom = 'billed annually';
+    if (isYearlyPeriodicity) {
+      recurranceTextTop = '/month';
+      recurranceTextBottom = 'billed annually';
+    } else {
+      (recurranceTextTop = ''), (recurranceTextBottom = '/month');
+    }
   }
 
   if (title === 'teams') {
-    recurranceTextTop = 'per user /month';
-    recurranceTextBottom = 'billed annually';
+    if (isYearlyPeriodicity) {
+      recurranceTextTop = 'per user /month';
+      recurranceTextBottom = 'billed annually';
+    } else {
+      recurranceTextTop = '';
+      recurranceTextBottom = 'per user /month';
+    }
   }
 
   let priceToBeDisplayed: string | number = priceInUSD;

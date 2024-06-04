@@ -26,6 +26,7 @@ const PriceOptionList: FunctionComponent<PriceOptionListProps> = ({
         subTitle={'Limited Access'}
         priceInUSD={0 * yearlyMultiplier}
         currency={currency}
+        isYearlyPeriodicity={isYearlyPeriodicity}
         buttonText='Get Started'
         featureList={BasicPlanOptions}
       />
@@ -34,6 +35,7 @@ const PriceOptionList: FunctionComponent<PriceOptionListProps> = ({
         subTitle={'For Individuals'}
         priceInUSD={25 * yearlyMultiplier}
         currency={currency}
+        isYearlyPeriodicity={isYearlyPeriodicity}
         buttonText='Subscribe now'
         isHighlighted
         isBestValue
@@ -44,6 +46,7 @@ const PriceOptionList: FunctionComponent<PriceOptionListProps> = ({
         subTitle={'For teams of 2 and up'}
         priceInUSD={25 * yearlyMultiplier}
         currency={currency}
+        isYearlyPeriodicity={isYearlyPeriodicity}
         buttonText='Set Up a Team'
         isBestValue
         includesPreviousOptionText='Everything in Premium plus:'
@@ -54,6 +57,7 @@ const PriceOptionList: FunctionComponent<PriceOptionListProps> = ({
         subTitle={'Bespoke Solutions'}
         priceInUSD={-1 * yearlyMultiplier}
         currency={currency}
+        isYearlyPeriodicity={isYearlyPeriodicity}
         buttonText='Request a Demo'
         includesPreviousOptionText='Everything in Teams plus:'
         featureList={EnterprisePlanOption}
