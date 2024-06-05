@@ -1,7 +1,7 @@
 .priceOption {
   font-family: Studio-Feixen-Sans, Arial;
   box-sizing: border-box;
-  width: 305px;
+  width: 285px;
   background-color: white;
   box-sizing: border-box;
   max-height: 560px;
@@ -26,11 +26,23 @@
     &.MXN {
       height: 552px;
     }
+    &.INR {
+      height: 552px;
+    }
+    &.BRL {
+      height: 552px;
+    }
   }
   &.enterprise {
     border-radius: 2px;
   }
   &.MXN {
+    height: 526px;
+  }
+  &.INR {
+    height: 526px;
+  }
+  &.BRL {
     height: 526px;
   }
 }
@@ -136,6 +148,15 @@
   font-family: Studio-Feixen-Sans, Arial, sans-serif;
   &.premium {
     background-color: #03ef62;
+    &.MXN {
+      margin-top: 21 px;
+    }
+    &.INR {
+      margin-top: 21 px;
+    }
+    &.BRL {
+      margin-top: 21 px;
+    }
   }
   &.teams {
     background-color: rgb(217, 217, 225);
@@ -144,6 +165,16 @@
     background-color: white;
   }
   &.MXN {
+    flex-direction: column;
+    height: 120px;
+    align-items: start;
+  }
+  &.INR {
+    flex-direction: column;
+    height: 120px;
+    align-items: start;
+  }
+  &.BRL {
     flex-direction: column;
     height: 120px;
     align-items: start;

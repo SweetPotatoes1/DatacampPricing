@@ -34,7 +34,6 @@ const PriceOptionList: FunctionComponent<PriceOptionListProps> = ({
     currency !== 'USD' && exchangeRates ? exchangeRates[`${currency}`] : 1;
   const yearlyMultiplier = isYearlyPeriodicity ? 1 : 3;
 
-  console.log(25 * yearlyMultiplier * exchangeMultiplier);
   return (
     <div className={styles.priceOptionList}>
       <PriceOption
