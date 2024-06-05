@@ -11,6 +11,7 @@ type PricingOptionProps = {
   linkAtTheBottom?: string;
   includesPreviousOptionText?: string;
   priceInUSD: number;
+  decimalPrice?: string;
   currency: string;
   isYearlyPeriodicity: boolean;
   buttonText: string;
@@ -24,6 +25,7 @@ const PriceOption: FunctionComponent<PricingOptionProps> = ({
   isHighlighted,
   priceInUSD,
   currency,
+  decimalPrice,
   isYearlyPeriodicity,
   linkAtTheBottom,
   includesPreviousOptionText,
@@ -58,6 +60,8 @@ const PriceOption: FunctionComponent<PricingOptionProps> = ({
   if (priceInUSD === 0) priceToBeDisplayed = 'Free';
   if (priceInUSD < 0) priceToBeDisplayed = 'Contact sales for pricing';
 
+  console.log(decimalPrice);
+
   return (
     <article
       className={joinClasses(
@@ -83,9 +87,12 @@ const PriceOption: FunctionComponent<PricingOptionProps> = ({
           styles[currency]
         )}
       >
-        <strong className={joinClasses(styles.priceText, styles[`${title}`])}>
-          {`${priceInUSD > 0 ? currencySymbol : ''}${priceToBeDisplayed}`}
-        </strong>
+        <div className={styles.priceWithDecimal}>
+          <strong className={joinClasses(styles.priceText, styles[`${title}`])}>
+            {`${priceInUSD > 0 ? currencySymbol : ''}${priceToBeDisplayed}`}
+          </strong>
+          {decimalPrice ? <strong>{`.${decimalPrice}`}</strong> : null}
+        </div>
         {(title === 'premium' || title === 'teams') && (
           <div
             className={joinClasses(

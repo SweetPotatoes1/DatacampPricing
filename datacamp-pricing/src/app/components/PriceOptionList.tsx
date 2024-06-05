@@ -10,6 +10,7 @@ import {
   EnterprisePlanOption,
 } from '../const/PlanOptions';
 import { API_REQUEST_URL } from '../const/ApiCredentials';
+import { getFirstTwoDecimals } from '../utils/numberUtils';
 
 type PriceOptionListProps = {
   isYearlyPeriodicity: boolean;
@@ -33,6 +34,7 @@ const PriceOptionList: FunctionComponent<PriceOptionListProps> = ({
     currency !== 'USD' && exchangeRates ? exchangeRates[`${currency}`] : 1;
   const yearlyMultiplier = isYearlyPeriodicity ? 1 : 3;
 
+  console.log(25 * yearlyMultiplier * exchangeMultiplier);
   return (
     <div className={styles.priceOptionList}>
       <PriceOption
@@ -48,6 +50,9 @@ const PriceOptionList: FunctionComponent<PriceOptionListProps> = ({
         title={'premium'}
         subTitle={'For Individuals'}
         priceInUSD={Math.round(25 * yearlyMultiplier * exchangeMultiplier)}
+        decimalPrice={getFirstTwoDecimals(
+          25 * yearlyMultiplier * exchangeMultiplier
+        )}
         currency={currency}
         isYearlyPeriodicity={isYearlyPeriodicity}
         buttonText='Subscribe now'
@@ -59,6 +64,9 @@ const PriceOptionList: FunctionComponent<PriceOptionListProps> = ({
         title={'teams'}
         subTitle={'For teams of 2 and up'}
         priceInUSD={Math.round(25 * yearlyMultiplier * exchangeMultiplier)}
+        decimalPrice={getFirstTwoDecimals(
+          25 * yearlyMultiplier * exchangeMultiplier
+        )}
         currency={currency}
         isYearlyPeriodicity={isYearlyPeriodicity}
         buttonText='Set Up a Team'
