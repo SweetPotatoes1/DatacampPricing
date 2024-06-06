@@ -296,6 +296,7 @@
 }
 
 .checkmark {
+  flex-shrink: 0;
   margin-right: 8px;
   margin-top: 2px;
 }
